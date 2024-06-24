@@ -6,9 +6,8 @@ class TestBun:
         bun_get_name = bun_choice.get_name()
 
         assert bun_get_name == bun_name
-    def test_bun_return_name111(self):
-        bun = Bun(name="123", price=123)
+    def test_bun_return_price(self, bun_choice):
+        bun_price = bun_choice.price
+        bun_get_price = bun_choice.get_price()
 
-        x = bun.get_name()
-
-        assert x == "123"
+        assert bun_get_price == bun_price
