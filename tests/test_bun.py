@@ -1,13 +1,29 @@
-from conftest import*
+import pytest
+from bun import Bun
+from data import DataForTests
+
+
 class TestBun:
+    @pytest.mark.parametrize(
+        "name,price",
+        [
+            (DataForTests.BLACK_BUN, DataForTests.PRICE_BLACK_BUN),
+            (DataForTests.WHITE_BUN, DataForTests.PRICE_WHITE_BUN),
+            (DataForTests.RED_BUN, DataForTests.PRICE_RED_BUN),
+        ],
+    )
+    def test_method_get_name(self, name, price):
+        bun = Bun(name, price)
+        assert bun.get_name() == name
 
-    def test_bun_return_name(self, bun_choice):
-        bun_name = bun_choice.name
-        bun_get_name = bun_choice.get_name()
-
-        assert bun_get_name == bun_name
-    def test_bun_return_price(self, bun_choice):
-        bun_price = bun_choice.price
-        bun_get_price = bun_choice.get_price()
-
-        assert bun_get_price == bun_price
+    @pytest.mark.parametrize(
+        "name,price",
+        [
+            (DataForTests.BLACK_BUN, DataForTests.PRICE_BLACK_BUN),
+            (DataForTests.WHITE_BUN, DataForTests.PRICE_WHITE_BUN),
+            (DataForTests.RED_BUN, DataForTests.PRICE_RED_BUN),
+        ],
+    )
+    def test_method_get_price(self, name, price):
+        bun = Bun(name, price)
+        assert bun.get_price() == price

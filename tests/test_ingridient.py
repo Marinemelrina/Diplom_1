@@ -1,37 +1,27 @@
-import random
 from ingredient import Ingredient
-from ingredient_types import INGREDIENT_TYPE_SAUCE, INGREDIENT_TYPE_FILLING
-from unittest.mock import Mock
+from ingredient_types import INGREDIENT_TYPE_SAUCE
+from data import DataForTests
 
 
-class TestIngridient:
-    mock_available_ingredients = Mock()
-    mock_available_ingredients.return_value = [
-        Ingredient(INGREDIENT_TYPE_SAUCE, "hot sauce", 100),
-        Ingredient(INGREDIENT_TYPE_SAUCE, "sour cream", 200),
-        Ingredient(INGREDIENT_TYPE_SAUCE, "chili sauce", 300),
-        Ingredient(INGREDIENT_TYPE_FILLING, "cutlet", 100),
-        Ingredient(INGREDIENT_TYPE_FILLING, "dinosaur", 200),
-        Ingredient(INGREDIENT_TYPE_FILLING, "sausage", 300),
-    ]
+class TestIngredient:
+    def test_get_price_successfully(self):
+        ingredient = Ingredient(
+            INGREDIENT_TYPE_SAUCE,
+            DataForTests.CHILI_SAUSE,
+            DataForTests.PRICE_CHILI_SAUSE,
+        )
+        assert ingredient.get_price() == DataForTests.PRICE_CHILI_SAUSE
 
-    def test_get_type(self):
-        ingredient = random.choice(TestIngridient.mock_available_ingredients())
-        ingridient_type = ingredient.get_type()
-        actually_type = ingredient.type
+    def test_get_name_successfully(self):
+        ingredient = Ingredient(
+            INGREDIENT_TYPE_SAUCE,
+            DataForTests.SOUR_CREAM,
+            DataForTests.PRICE_SOUR_CREAM,
+        )
+        assert ingredient.get_name() == DataForTests.SOUR_CREAM
 
-        assert ingridient_type == actually_type
-
-    def test_get_name(self):
-        ingredient = random.choice(TestIngridient.mock_available_ingredients())
-        ingridient_name = ingredient.get_name()
-        actually_name = ingredient.name
-
-        assert ingridient_name == actually_name
-
-    def test_get_price(self):
-        ingredient = random.choice(TestIngridient.mock_available_ingredients())
-        ingridient_price = ingredient.get_price()
-        actually_price = ingredient.price
-
-        assert ingridient_price == actually_price
+    def test_get_type_successfully(self):
+        ingredient = Ingredient(
+            INGREDIENT_TYPE_SAUCE, DataForTests.HOT_SAUSE, DataForTests.PRICE_HOT_SAUSE
+        )
+        assert ingredient.get_type() == INGREDIENT_TYPE_SAUCE
